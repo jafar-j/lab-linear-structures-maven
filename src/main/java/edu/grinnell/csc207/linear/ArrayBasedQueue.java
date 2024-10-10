@@ -122,21 +122,15 @@ public class ArrayBasedQueue<T> implements Queue<T> {
 } // class ArrayBasedQueue<T>
 
 
-class ArrayBasedQueueIterator<T> implements Iterator<T> {
-  // +--------+----------------------------------------------------------
-  // | Fields |
-  // +--------+
+private ArrayBasedQueueIterator<T> implements Iterator<T> {
+  ArrayBasedQueue<T> abq;
+  int i;
 
-  // +--------------+----------------------------------------------------
-  // | Constructors |
-  // +--------------+
+  public ArrayBasedQueueIterator(ArrayBasedQueue<T> abq) {
+    this.abq = abq;
+    this.i = abq.front;
+  }
 
-  /**
-   * Create a new iterator.
-   */
-  public ArrayBasedQueueIterator(ArrayBasedQueue<T> q) {
-    // STUB
-  } // ArrayBasedQueueIterator
 
   // +---------+---------------------------------------------------------
   // | Methods |
@@ -144,21 +138,20 @@ class ArrayBasedQueueIterator<T> implements Iterator<T> {
 
   @Override
   public T next() throws NoSuchElementException {
-    if (!this.hasNext()) {
+    if (!this.hasNext()){
       throw new NoSuchElementException("no elements remain");
     } // if no elements
     // STUB
-    throw new NoSuchElementException("unimplemented");
+    return(this.abq.values[++this.i]);
   } // next()
 
   @Override
   public boolean hasNext() {
-    // STUB
-    return false;
+    return (this.i > ((this.abq.size)+abq.front));
   } // hasNext()
 
   @Override
-  public void remove() throws UnsupportedOperationException {
-    throw new UnsupportedOperationException();
+  public void remove() {
+    this.abq.get(this.i);
   } // remove()
 } // ArrayBasedQueueIterator<T>
